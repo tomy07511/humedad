@@ -23,10 +23,7 @@ def load_model():
         with open('modelo_humedad.pkl', 'rb') as f:
             saved_data = pickle.load(f)
             
-            # Mostrar el orden REAL de clases del modelo para diagnóstico
-            if hasattr(saved_data['model'], 'classes_'):
-                           st.warning(f" {saved_data['model'].classes_}")
-            return saved_data['model'], saved_data['scaler']
+            
     except Exception as e:
         st.error(f"Error al cargar el modelo: {str(e)}")
         st.stop()
