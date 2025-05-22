@@ -6,14 +6,14 @@ from sklearn.preprocessing import StandardScaler
 
 # Configuración de la página
 st.set_page_config(page_title="Monitor de Humedad", layout="centered")
-st.title("💧 Sistema Inteligente de Riego")
+st.title(" Sistema Inteligente de Riego")
 
 # ORDEN CORRECTO DEFINIDO MANUALMENTE (como debe ser)
 ESTADOS_CORRECTOS = [
-    "🌵 Muy Seco (Riego urgente)",  # Índice 0
-    "☀️ Seco (Necesita agua)",      # Índice 1
-    "🌱 Óptimo (Buen estado)",      # Índice 2
-    "⚠️ Saturado (Riesgo de hongos)" # Índice 3
+    " Muy Seco (Riego urgente)",  # Índice 0
+    " Seco (Necesita agua)",      # Índice 1
+    " Óptimo (Buen estado)",      # Índice 2
+    " Saturado (Riesgo de hongos)" # Índice 3
 ]
 
 # Cargar modelo y escalador
@@ -25,8 +25,7 @@ def load_model():
             
             # Mostrar el orden REAL de clases del modelo para diagnóstico
             if hasattr(saved_data['model'], 'classes_'):
-                st.warning(f"⚠️ Orden de clases en el modelo cargado: {saved_data['model'].classes_}")
-            
+                         
             return saved_data['model'], saved_data['scaler']
     except Exception as e:
         st.error(f"Error al cargar el modelo: {str(e)}")
@@ -83,10 +82,10 @@ def main():
             # Recomendación
             st.subheader("📋 Recomendación")
             recomendaciones = [
-                "🔴 Regar inmediatamente - Suelo extremadamente seco",
-                "🟡 Regar pronto - Suelo comenzando a secarse",
-                "🟢 Condición perfecta - Mantener monitoreo",
-                "🔵 Detener riego - Suelo sobresaturado"
+                " Regar inmediatamente - Suelo extremadamente seco",
+                " Regar pronto - Suelo comenzando a secarse",
+                " Condición perfecta - Mantener monitoreo",
+                " Detener riego - Suelo sobresaturado"
             ]
             st.warning(recomendaciones[class_index])
                 
