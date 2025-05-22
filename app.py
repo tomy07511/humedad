@@ -25,7 +25,7 @@ def load_model():
             
             # Mostrar el orden REAL de clases del modelo para diagnóstico
             if hasattr(saved_data['model'], 'classes_'):
-                         
+                           st.warning( {saved_data['model'].classes_}")
             return saved_data['model'], saved_data['scaler']
     except Exception as e:
         st.error(f"Error al cargar el modelo: {str(e)}")
