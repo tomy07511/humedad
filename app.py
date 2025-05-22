@@ -9,12 +9,12 @@ st.set_page_config(page_title="Monitor de Humedad", layout="centered")
 st.title("💧 Sistema Inteligente de Riego")
 
 # Estados posibles (4 categorías)
-ESTADOS = {
-    0: "🌵 Muy Seco (Riego urgente)",
-    1: "☀️ Seco (Necesita agua)",
-    2: "🌱 Óptimo (Buen estado)",
-    3: "⚠️ Saturado (Riesgo de hongos)"
-}
+ESTADOS = [
+    "🌵 Muy Seco (Riego urgente)",  # Índice 0
+    "☀️ Seco (Necesita agua)",      # Índice 1
+    "🌱 Óptimo (Buen estado)",      # Índice 2
+    "⚠️ Saturado (Riesgo de hongos)" # Índice 3
+]
 
 # Cargar modelo y escalador
 @st.cache_resource
@@ -46,7 +46,10 @@ def main():
             # Normalización y predicción
             humedad_norm = scaler.transform([[humedad]])
             pred = model.predict(humedad_norm)
-            estado = ESTADOS[pred[0]]
+            
+            # Obtener el índice de la clase predicha
+            class_index = np.argmax(pred) if pred.ndim > 1 else pred[0]
+            estado = ESTADOS[class_index]
             
             # Mostrar resultados
             col1, col2 = st.columns(2)
@@ -59,11 +62,11 @@ def main():
                 
             # Recomendación basada en el estado
             st.subheader("📋 Recomendación")
-            if pred[0] == 0:
+            if class_index == 0:
                 st.warning("🔴 Regar inmediatamente - El suelo está extremadamente seco")
-            elif pred[0] == 1:
+            elif class_index == 1:
                 st.info("🟡 Regar pronto - El suelo está comenzando a secarse")
-            elif pred[0] == 2:
+            elif class_index == 2:
                 st.success("🟢 Condición perfecta - Mantener monitoreo")
             else:
                 st.error("🔵 Detener riego - Suelo sobresaturado")
