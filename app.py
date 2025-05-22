@@ -38,7 +38,7 @@ def corregir_orden_prediccion(pred_proba):
     """Corrige el orden invertido entre Óptimo y Muy Seco"""
     # Asumiendo que el modelo tiene: [Óptimo, Saturado, Seco, Muy Seco]
     # Y nosotros queremos: [Muy Seco, Seco, Óptimo, Saturado]
-    return np.array([pred_proba[3], pred_proba[2], pred_proba[0], pred_proba[1]])
+    return np.array([pred_proba[0], pred_proba[2], pred_proba[3], pred_proba[1]])
 
 # Interfaz principal
 def main():
